@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { journeys } from '@/content/journeys'
 import BlockRenderer from '@/components/BlockRenderer'
+import { save } from '@/lib/storage'
 
 export default function Journey() {
   const { id } = useParams<{ id: string }>()
@@ -11,6 +12,7 @@ export default function Journey() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    if (id) save('last_journey', id)
   }, [id])
 
   if (!journey) {

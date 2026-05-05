@@ -5,6 +5,7 @@ import { usePersistedState, streakFromDates } from '@/lib/hooks'
 import { LadderItem, ResetEntry } from '@/lib/storage'
 import DailyCheckin from '@/components/DailyCheckin'
 import TodaysPrompt from '@/components/TodaysPrompt'
+import JourneyPath from '@/components/JourneyPath'
 
 export default function Home() {
   const [items] = usePersistedState<LadderItem[]>('ladder_items', [])
@@ -44,6 +45,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* JOURNEY PATH — progress through all 8 journeys */}
+      <JourneyPath />
 
       {/* STATS */}
       {(items.length > 0 || resets.length > 0) && (
