@@ -66,3 +66,9 @@ export interface JourneyAnswers {
 export type AllAnswers = {
   [journeyId: string]: JourneyAnswers
 }
+
+export interface CheckIn {
+  date: string // YYYY-MM-DD
+  feel: 1 | 2 | 3 | 4 | 5 // 1 = heavy, 5 = light
+  note?: string
+}

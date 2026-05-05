@@ -6,6 +6,7 @@ import Journey from './pages/Journey'
 import Ladder from './pages/Ladder'
 import Reset from './pages/Reset'
 import Welcome from './pages/Welcome'
+import Notes from './pages/Notes'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/journey/:id" element={<Journey />} />
         <Route path="/ladder" element={<Ladder />} />
         <Route path="/reset" element={<Reset />} />
+        <Route path="/notes" element={<Notes />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Layout>

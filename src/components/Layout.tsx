@@ -1,12 +1,14 @@
 import { ReactNode } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Home, BookOpen, ListChecks, Timer, Heart } from 'lucide-react'
+import { Home, BookOpen, ListChecks, Timer, Heart, NotebookPen } from 'lucide-react'
+import BreathPause from './BreathPause'
 
 const navItems = [
   { to: '/', label: 'Home', icon: Home },
   { to: '/journeys', label: 'Journeys', icon: BookOpen },
-  { to: '/ladder', label: 'Exposure Ladder', icon: ListChecks },
-  { to: '/reset', label: '15-min Reset', icon: Timer },
+  { to: '/ladder', label: 'Ladder', icon: ListChecks },
+  { to: '/reset', label: 'Reset', icon: Timer },
+  { to: '/notes', label: 'My Notes', icon: NotebookPen },
 ]
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -52,6 +54,8 @@ export default function Layout({ children }: { children: ReactNode }) {
       )}
 
       <main className={hideChrome ? '' : 'pb-28 md:pb-12'}>{children}</main>
+
+      {!hideChrome && <BreathPause />}
 
       {!hideChrome && (
         <>

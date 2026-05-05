@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, BookOpen, ListChecks, Timer, Sparkles } from 'lucide-react'
 import { journeys } from '@/content/journeys'
-import { usePersistedState, todayISO, streakFromDates } from '@/lib/hooks'
+import { usePersistedState, streakFromDates } from '@/lib/hooks'
 import { LadderItem, ResetEntry } from '@/lib/storage'
+import DailyCheckin from '@/components/DailyCheckin'
+import TodaysPrompt from '@/components/TodaysPrompt'
 
 export default function Home() {
   const [items] = usePersistedState<LadderItem[]>('ladder_items', [])
@@ -45,13 +47,19 @@ export default function Home() {
 
       {/* STATS */}
       {(items.length > 0 || resets.length > 0) && (
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
           <Stat label="On the ladder" value={String(onLadder)} sub="items in process" />
           <Stat label="Released" value={String(released)} sub="items let go" />
           <Stat label="Reset streak" value={`${streak}`} sub="day(s) in a row" />
           <Stat label="Total resets" value={String(resets.length)} sub="completed sessions" />
         </section>
       )}
+
+      {/* DAILY CHECK-IN + TODAY'S PROMPT */}
+      <div className="grid md:grid-cols-2 gap-5 mb-14">
+        <DailyCheckin />
+        <TodaysPrompt />
+      </div>
 
       {/* WHAT'S INSIDE */}
       <section className="mb-14">
