@@ -57,24 +57,24 @@ export default function Ladder() {
         <span className="font-medium text-sage-500">Ladder</span>
       </h1>
       <div className="accent-rule mt-5" />
-      <p className="font-display italic text-xl text-muted mt-5 max-w-xl">
+      <p className="font-display italic text-2xl text-muted mt-5 max-w-xl leading-snug">
         One small step at a time. Add an emotionally sticky item below — and walk it gently down.
       </p>
 
       {/* The 5 steps reference */}
-      <div className="mt-8 mb-10 grid grid-cols-5 gap-2 md:gap-3">
+      <div className="mt-9 mb-10 grid grid-cols-5 gap-2 md:gap-3">
         {ladderSteps.map((s) => (
           <div key={s.n} className="text-center bg-sage-50 rounded-lg p-3 md:p-4">
-            <div className="font-display italic text-2xl md:text-3xl text-sage-400 leading-none">{s.roman}</div>
-            <div className="font-display text-xs md:text-sm text-ink mt-1 leading-tight">{s.title}</div>
+            <div className="font-display italic text-3xl md:text-4xl text-sage-400 leading-none">{s.roman}</div>
+            <div className="font-display text-sm md:text-base text-ink mt-1.5 leading-tight">{s.title}</div>
           </div>
         ))}
       </div>
 
       {/* ADD BUTTON */}
       {!showAdd && (
-        <button onClick={() => setShowAdd(true)} className="w-full bg-cream hover:bg-gold-soft/40 border-2 border-dashed border-gold-soft hover:border-gold rounded-2xl p-6 transition-colors flex items-center justify-center gap-2 text-sage-600 font-display italic text-lg">
-          <Plus className="w-5 h-5" /> Add an item to the ladder
+        <button onClick={() => setShowAdd(true)} className="w-full bg-cream hover:bg-gold-soft/40 border-2 border-dashed border-gold-soft hover:border-gold rounded-2xl p-7 transition-colors flex items-center justify-center gap-2 text-sage-600 font-display italic text-2xl">
+          <Plus className="w-6 h-6" /> Add an item to the ladder
         </button>
       )}
 
@@ -221,11 +221,11 @@ function ItemRow({
     <div className="bg-ivory border border-rule/60 rounded-2xl p-5 md:p-6 shadow-sm">
       <div className="flex items-start justify-between gap-3 mb-4">
         <div className="min-w-0 flex-1">
-          <div className="font-display italic text-2xl text-ink leading-tight">{item.name}</div>
-          {item.why && <div className="text-sm text-muted mt-1 italic">{item.why}</div>}
+          <div className="font-display italic text-3xl text-ink leading-tight">{item.name}</div>
+          {item.why && <div className="text-base text-muted mt-1.5 italic">{item.why}</div>}
         </div>
         <button onClick={() => onRemove(item.id)} className="p-1.5 rounded-full hover:bg-cream text-muted flex-shrink-0">
-          <Trash2 className="w-4 h-4" />
+          <Trash2 className="w-5 h-5" />
         </button>
       </div>
 
@@ -242,16 +242,16 @@ function ItemRow({
       </div>
 
       {/* Current step */}
-      <div className="bg-cream/60 rounded-xl p-4 border border-gold-soft">
+      <div className="bg-cream/60 rounded-xl p-5 border border-gold-soft">
         <div className="flex items-center gap-2 mb-1">
-          <span className="font-display italic text-2xl text-sage-500">{currentStep.roman}</span>
-          <span className="text-[10px] uppercase tracking-[0.22em] text-muted">Currently at</span>
+          <span className="font-display italic text-3xl text-sage-500">{currentStep.roman}</span>
+          <span className="text-xs uppercase tracking-[0.22em] text-muted">Currently at</span>
         </div>
-        <div className="font-display text-xl text-ink font-medium">{currentStep.title}</div>
-        <p className="text-sm text-ink-soft mt-1 leading-relaxed">{currentStep.body}</p>
+        <div className="font-display text-2xl text-ink font-medium">{currentStep.title}</div>
+        <p className="text-base text-ink-soft mt-2 leading-relaxed">{currentStep.body}</p>
 
         {nextStep && suggested > 0 && (
-          <div className="mt-3 text-xs text-muted">
+          <div className="mt-3 text-sm text-muted">
             {ready ? (
               <span className="text-sage-600 font-medium">
                 ✓ Ready to advance — it's been {daysSince} day{daysSince === 1 ? '' : 's'}.
@@ -266,20 +266,20 @@ function ItemRow({
       </div>
 
       {/* Actions */}
-      <div className="flex items-center justify-between mt-4 gap-2">
+      <div className="flex items-center justify-between mt-5 gap-2">
         <button
           onClick={() => onAdvance(item.id, -1)}
           disabled={item.step === 1}
-          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted hover:text-sage-500 hover:bg-cream disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-muted transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-base font-medium text-muted hover:text-sage-500 hover:bg-cream disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-muted transition-colors"
         >
-          <ArrowLeft className="w-3.5 h-3.5" /> Back
+          <ArrowLeft className="w-4 h-4" /> Back
         </button>
         {nextStep ? (
-          <button onClick={() => onAdvance(item.id, 1)} className="btn-primary">
+          <button onClick={() => onAdvance(item.id, 1)} className="btn-primary text-base">
             Advance to {nextStep.title} <ArrowRight className="w-4 h-4" />
           </button>
         ) : (
-          <button onClick={() => onAdvance(item.id, 1)} className="btn-primary">
+          <button onClick={() => onAdvance(item.id, 1)} className="btn-primary text-base">
             Released <Sparkles className="w-4 h-4" />
           </button>
         )}

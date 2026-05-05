@@ -10,7 +10,7 @@ export default function JourneyList() {
         Seven Journeys
       </h1>
       <div className="accent-rule mt-5" />
-      <p className="font-display italic text-xl text-muted mt-5 max-w-xl">
+      <p className="font-display italic text-2xl text-muted mt-6 max-w-xl leading-snug">
         Move at your own pace. Linger where you need to. There is no right speed — only the one that's yours.
       </p>
 
@@ -19,19 +19,19 @@ export default function JourneyList() {
           <Link
             key={j.id}
             to={`/journey/${j.id}`}
-            className="block group rounded-2xl border border-rule/60 hover:border-sage-300 bg-ivory hover:bg-cream/40 transition-all p-5 md:p-6"
+            className="block group rounded-2xl border border-rule/60 hover:border-sage-300 bg-ivory hover:bg-cream/40 transition-all p-6 md:p-7"
           >
             <div className="flex items-start gap-5">
-              <div className="font-display italic text-4xl text-gold w-12 text-center flex-shrink-0 leading-none pt-1">
+              <div className="font-display italic text-5xl text-gold w-14 text-center flex-shrink-0 leading-none pt-1">
                 {j.numberRoman}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-display text-2xl md:text-3xl text-ink leading-tight">
+                <h3 className="font-display text-3xl md:text-4xl text-ink leading-tight">
                   {j.title}{' '}
                   <span className="italic font-medium text-sage-500">{j.titleAccent}</span>
                 </h3>
-                <p className="font-display italic text-base md:text-lg text-muted mt-1">{j.subtitle}</p>
-                <div className="mt-3 font-display italic text-base text-sage-600 border-l-2 border-gold pl-3">
+                <p className="font-display italic text-lg md:text-xl text-muted mt-1.5">{j.subtitle}</p>
+                <div className="mt-4 font-display italic text-lg text-sage-600 border-l-2 border-gold pl-4">
                   "{j.quote}"
                 </div>
               </div>

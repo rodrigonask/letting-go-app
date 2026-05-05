@@ -6,6 +6,7 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 17px;
   }
   body {
     @apply font-body bg-ivory text-ink;
@@ -42,10 +43,10 @@
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sage-500 font-medium text-sm hover:bg-sage-50 transition-colors;
   }
   .input-line {
-    @apply w-full bg-transparent border-b border-rule pb-2 font-display text-lg italic text-ink placeholder:text-muted/60 focus:outline-none focus:border-sage-400 transition-colors;
+    @apply w-full bg-transparent border-b border-rule pb-2 font-display text-2xl italic text-ink placeholder:text-muted/60 focus:outline-none focus:border-sage-400 transition-colors;
   }
   .textarea-soft {
-    @apply w-full bg-cream/40 border border-rule rounded-lg p-3 font-display text-base text-ink placeholder:text-muted/60 focus:outline-none focus:border-sage-400 focus:bg-cream resize-none transition-colors;
+    @apply w-full bg-cream/40 border border-rule rounded-lg p-4 font-display text-xl text-ink placeholder:text-muted/60 focus:outline-none focus:border-sage-400 focus:bg-cream resize-none transition-colors leading-relaxed;
   }
 }
 

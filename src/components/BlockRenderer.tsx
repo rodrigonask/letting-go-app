@@ -13,21 +13,21 @@ export default function BlockRenderer({ block, journeyId }: Props) {
   switch (block.type) {
     case 'lede':
       return (
-        <p className="font-display italic text-xl md:text-2xl text-sage-600 leading-snug border-l-2 border-gold pl-4 my-6">
+        <p className="font-display italic text-2xl md:text-3xl text-sage-600 leading-snug border-l-2 border-gold pl-5 my-7">
           {block.text}
         </p>
       )
     case 'p':
-      return <p className="font-display text-lg leading-relaxed text-ink-soft mb-4">{block.text}</p>
+      return <p className="font-display text-xl leading-relaxed text-ink-soft mb-5">{block.text}</p>
     case 'h2':
-      return <h2 className="font-display text-3xl text-ink mt-10 mb-4">{block.text}</h2>
+      return <h2 className="font-display text-4xl text-ink mt-12 mb-4">{block.text}</h2>
     case 'h3':
-      return <h3 className="font-display italic text-2xl text-sage-500 mt-8 mb-3">{block.text}</h3>
+      return <h3 className="font-display italic text-3xl text-sage-500 mt-9 mb-3">{block.text}</h3>
     case 'pull':
       return (
-        <div className="my-10 px-4 md:px-8 text-center">
+        <div className="my-12 px-4 md:px-8 text-center">
           <div className="accent-rule mx-auto mb-5" />
-          <p className="font-display italic text-2xl md:text-3xl text-sage-600 leading-snug">
+          <p className="font-display italic text-3xl md:text-4xl text-sage-600 leading-snug">
             {block.text}
           </p>
           <div className="accent-rule mx-auto mt-5" />
@@ -35,10 +35,10 @@ export default function BlockRenderer({ block, journeyId }: Props) {
       )
     case 'list':
       return (
-        <ul className="space-y-2 my-5">
+        <ul className="space-y-3 my-6">
           {block.items.map((item, i) => (
-            <li key={i} className="font-display text-lg text-ink-soft pl-6 relative leading-relaxed">
-              <span className="absolute left-0 top-1 text-gold text-xl leading-none">◦</span>
+            <li key={i} className="font-display text-xl text-ink-soft pl-7 relative leading-relaxed">
+              <span className="absolute left-0 top-1 text-gold text-2xl leading-none">◦</span>
               {item}
             </li>
           ))}
@@ -46,12 +46,12 @@ export default function BlockRenderer({ block, journeyId }: Props) {
       )
     case 'story':
       return (
-        <div className="my-8 bg-sage-50 border-l-4 border-sage-400 rounded-r-lg p-5 md:p-6">
-          <div className="text-[11px] uppercase tracking-[0.22em] text-sage-600 font-medium mb-3">
+        <div className="my-9 bg-sage-50 border-l-4 border-sage-400 rounded-r-lg p-6 md:p-7">
+          <div className="text-xs uppercase tracking-[0.22em] text-sage-600 font-semibold mb-4">
             {block.label}
           </div>
           {block.paragraphs.map((p, i) => (
-            <p key={i} className="font-display italic text-lg text-ink-soft leading-relaxed mb-3 last:mb-0">
+            <p key={i} className="font-display italic text-xl text-ink-soft leading-relaxed mb-4 last:mb-0">
               {p}
             </p>
           ))}
@@ -60,7 +60,7 @@ export default function BlockRenderer({ block, journeyId }: Props) {
     case 'note':
       return (
         <div
-          className={`my-8 rounded-lg border p-5 md:p-6 relative overflow-hidden ${
+          className={`my-9 rounded-lg border p-6 md:p-7 relative overflow-hidden ${
             block.author === 'Nichole'
               ? 'bg-sage-50/60 border-sage-200'
               : 'bg-cream border-gold-soft'
@@ -71,9 +71,9 @@ export default function BlockRenderer({ block, journeyId }: Props) {
               block.author === 'Nichole' ? 'bg-sage-400' : 'bg-gold'
             }`}
           />
-          <div className="font-script text-2xl text-sage-500 mb-2 leading-none">— {block.author}</div>
+          <div className="font-script text-3xl text-sage-500 mb-3 leading-none">— {block.author}</div>
           {block.paragraphs.map((p, i) => (
-            <p key={i} className="font-display italic text-lg text-ink-soft leading-relaxed mb-3 last:mb-0">
+            <p key={i} className="font-display italic text-xl text-ink-soft leading-relaxed mb-4 last:mb-0">
               {p}
             </p>
           ))}
@@ -81,16 +81,16 @@ export default function BlockRenderer({ block, journeyId }: Props) {
       )
     case 'softbox':
       return (
-        <div className="my-6 bg-sage-50 rounded-lg p-5 md:p-6">
-          <div className="text-[11px] uppercase tracking-[0.22em] text-sage-600 font-semibold mb-3">
+        <div className="my-7 bg-sage-50 rounded-lg p-6 md:p-7">
+          <div className="text-xs uppercase tracking-[0.22em] text-sage-600 font-semibold mb-4">
             {block.head}
           </div>
-          {block.text && <p className="font-display text-lg text-ink-soft leading-relaxed">{block.text}</p>}
+          {block.text && <p className="font-display text-xl text-ink-soft leading-relaxed">{block.text}</p>}
           {block.items && (
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {block.items.map((item, i) => (
-                <li key={i} className="font-display text-lg text-ink-soft pl-5 relative">
-                  <span className="absolute left-0 top-1 text-gold leading-none">◦</span>
+                <li key={i} className="font-display text-xl text-ink-soft pl-6 relative leading-relaxed">
+                  <span className="absolute left-0 top-1 text-gold text-xl leading-none">◦</span>
                   {item}
                 </li>
               ))}
@@ -110,40 +110,40 @@ export default function BlockRenderer({ block, journeyId }: Props) {
       return <ReframeTable journeyId={journeyId} />
     case 'trapcards':
       return (
-        <div className="space-y-4 my-6">
+        <div className="space-y-5 my-7">
           {traps.map((t) => (
-            <div key={t.n} className="border-l-[3px] border-sage-400 bg-ivory rounded-r-lg p-5 shadow-sm">
-              <div className="flex items-baseline gap-2 mb-2">
-                <span className="font-display italic text-gold text-lg">{t.n}.</span>
-                <h4 className="font-display italic text-xl text-sage-600 font-medium">{t.title}</h4>
+            <div key={t.n} className="border-l-[3px] border-sage-400 bg-ivory rounded-r-lg p-6 shadow-sm">
+              <div className="flex items-baseline gap-2 mb-3">
+                <span className="font-display italic text-gold text-xl">{t.n}.</span>
+                <h4 className="font-display italic text-2xl text-sage-600 font-medium">{t.title}</h4>
               </div>
-              <div className="border-l-2 border-gold-soft pl-4 mb-3 space-y-1">
+              <div className="border-l-2 border-gold-soft pl-4 mb-4 space-y-1.5">
                 {t.examples.map((e, i) => (
-                  <div key={i} className="font-display italic text-base text-ink-soft">
+                  <div key={i} className="font-display italic text-lg text-ink-soft">
                     {e}
                   </div>
                 ))}
               </div>
-              <p className="font-display text-base text-ink-soft leading-relaxed">{t.body}</p>
+              <p className="font-display text-lg text-ink-soft leading-relaxed">{t.body}</p>
             </div>
           ))}
         </div>
       )
     case 'realitychecks':
       return (
-        <div className="grid md:grid-cols-2 gap-4 my-8">
+        <div className="grid md:grid-cols-2 gap-5 my-9">
           {realityChecks.map((rc) => (
-            <div key={rc.n} className="bg-gradient-to-b from-cream to-ivory border border-gold-soft rounded-lg p-5">
-              <div className="font-display italic text-lg text-gold mb-1">N° {rc.n}</div>
-              <h4 className="font-display text-xl text-ink mb-2 font-medium">{rc.title}</h4>
-              <p className="font-display text-base text-ink-soft leading-relaxed">{rc.body}</p>
+            <div key={rc.n} className="bg-gradient-to-b from-cream to-ivory border border-gold-soft rounded-lg p-6">
+              <div className="font-display italic text-xl text-gold mb-1">N° {rc.n}</div>
+              <h4 className="font-display text-2xl text-ink mb-3 font-medium">{rc.title}</h4>
+              <p className="font-display text-lg text-ink-soft leading-relaxed">{rc.body}</p>
             </div>
           ))}
         </div>
       )
     case 'ladder':
       return (
-        <div className="my-8 space-y-4">
+        <div className="my-9 space-y-4">
           {/* Brief preview — full interactive ladder lives at /ladder */}
           <div className="grid md:grid-cols-5 gap-3">
             {[
@@ -154,27 +154,27 @@ export default function BlockRenderer({ block, journeyId }: Props) {
               { n: 'V', title: 'Release' },
             ].map((step, i) => (
               <div key={i} className="text-center bg-sage-50 rounded-lg p-4">
-                <div className="font-display italic text-3xl text-sage-400">{step.n}</div>
-                <div className="font-display text-base text-ink mt-1">{step.title}</div>
+                <div className="font-display italic text-4xl text-sage-400">{step.n}</div>
+                <div className="font-display text-lg text-ink mt-1">{step.title}</div>
               </div>
             ))}
           </div>
-          <Link to="/ladder" className="btn-primary mt-3">
+          <Link to="/ladder" className="btn-primary mt-3 text-base">
             Open the Exposure Ladder <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       )
     case 'steps':
       return (
-        <ol className="space-y-4 my-6">
+        <ol className="space-y-5 my-7">
           {block.items.map((item, i) => (
-            <li key={i} className="flex gap-4">
-              <div className="font-display italic text-3xl text-gold leading-none w-10 text-center flex-shrink-0 pt-1">
+            <li key={i} className="flex gap-5">
+              <div className="font-display italic text-4xl text-gold leading-none w-12 text-center flex-shrink-0 pt-1">
                 {i + 1}
               </div>
               <div className="flex-1">
-                <div className="font-display text-xl text-sage-600 font-medium mb-1">{item.title}</div>
-                <p className="font-display text-lg text-ink-soft leading-relaxed">{item.body}</p>
+                <div className="font-display text-2xl text-sage-600 font-medium mb-1.5">{item.title}</div>
+                <p className="font-display text-xl text-ink-soft leading-relaxed">{item.body}</p>
               </div>
             </li>
           ))}
@@ -196,8 +196,8 @@ function PromptInput({ journeyId, fieldId, label, placeholder }: { journeyId: st
   }
 
   return (
-    <div className="my-6">
-      <label className="block font-display italic text-lg text-ink mb-2">{label}</label>
+    <div className="my-7">
+      <label className="block font-display italic text-2xl text-ink mb-3 leading-snug">{label}</label>
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -206,7 +206,7 @@ function PromptInput({ journeyId, fieldId, label, placeholder }: { journeyId: st
         className="textarea-soft"
       />
       {value && (
-        <div className="text-[10px] tracking-[0.22em] uppercase text-sage-500 mt-1.5">
+        <div className="text-xs tracking-[0.22em] uppercase text-sage-500 mt-2">
           ✓ saved on this device
         </div>
       )}
@@ -236,11 +236,11 @@ function ReframeTable({ journeyId }: { journeyId: string }) {
   }
 
   return (
-    <div className="my-6 grid grid-cols-2 gap-3 md:gap-4">
-      <div className="text-[10px] uppercase tracking-[0.22em] text-sage-600 font-semibold pb-2 border-b border-sage-300">
+    <div className="my-7 grid grid-cols-2 gap-4">
+      <div className="text-xs uppercase tracking-[0.22em] text-sage-600 font-semibold pb-2 border-b border-sage-300">
         My Thought Trap
       </div>
-      <div className="text-[10px] uppercase tracking-[0.22em] text-sage-600 font-semibold pb-2 border-b border-sage-300">
+      <div className="text-xs uppercase tracking-[0.22em] text-sage-600 font-semibold pb-2 border-b border-sage-300">
         My Kinder Reframe
       </div>
       {rows.map((row, i) => (
@@ -250,14 +250,14 @@ function ReframeTable({ journeyId }: { journeyId: string }) {
             value={row.trap}
             onChange={(e) => update(i, 'trap', e.target.value)}
             placeholder="A thought that's holding me back…"
-            className="textarea-soft text-base"
+            className="textarea-soft text-lg"
           />
           <textarea
             rows={2}
             value={row.reframe}
             onChange={(e) => update(i, 'reframe', e.target.value)}
             placeholder="A kinder way to say it…"
-            className="textarea-soft text-base"
+            className="textarea-soft text-lg"
           />
         </Row>
       ))}

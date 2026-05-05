@@ -26,18 +26,18 @@ export default function Home() {
             <br />
             <span className="font-display italic font-medium text-gold-soft">with Love</span>
           </h1>
-          <p className="font-display italic text-xl md:text-2xl text-cream/85 mt-6 max-w-xl leading-snug">
+          <p className="font-display italic text-2xl md:text-3xl text-cream/85 mt-7 max-w-xl leading-snug">
             A gentle, interactive workbook for releasing emotional clutter — one small step at a time.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/welcome" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cream text-sage-600 font-medium text-sm tracking-wide hover:bg-gold-soft hover:text-sage-700 transition-colors">
-              <Sparkles className="w-4 h-4" /> Begin gently
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link to="/welcome" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-cream text-sage-600 font-medium text-base tracking-wide hover:bg-gold-soft hover:text-sage-700 transition-colors">
+              <Sparkles className="w-5 h-5" /> Begin gently
             </Link>
-            <Link to="/journeys" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream/30 text-cream font-medium text-sm tracking-wide hover:bg-cream/10 transition-colors">
-              Browse the journeys <ArrowRight className="w-4 h-4" />
+            <Link to="/journeys" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-cream/30 text-cream font-medium text-base tracking-wide hover:bg-cream/10 transition-colors">
+              Browse the journeys <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
-          <div className="mt-10 text-sm text-cream/70 flex items-center gap-3">
+          <div className="mt-10 text-base text-cream/70 flex items-center gap-3">
             <span>By Nichole Gehman &amp; Kate Fish, LMFT</span>
           </div>
         </div>
@@ -101,11 +101,11 @@ export default function Home() {
                 {j.numberRoman}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="font-display text-xl text-ink leading-tight">
+                <div className="font-display text-2xl text-ink leading-tight">
                   {j.title}{' '}
                   <span className="italic font-medium text-sage-500">{j.titleAccent}</span>
                 </div>
-                <div className="text-sm text-muted mt-0.5 italic font-display">{j.subtitle}</div>
+                <div className="text-base text-muted mt-1 italic font-display">{j.subtitle}</div>
               </div>
               <ArrowRight className="w-4 h-4 text-muted group-hover:text-sage-500 group-hover:translate-x-1 transition-all flex-shrink-0" />
             </Link>
@@ -114,12 +114,12 @@ export default function Home() {
       </section>
 
       {/* CLOSING */}
-      <section className="text-center max-w-2xl mx-auto py-10">
-        <div className="text-gold font-display italic text-3xl mb-4">— ✦ —</div>
-        <p className="font-display italic text-2xl text-sage-600 leading-snug">
+      <section className="text-center max-w-2xl mx-auto py-12">
+        <div className="text-gold font-display italic text-4xl mb-5">— ✦ —</div>
+        <p className="font-display italic text-3xl text-sage-600 leading-snug">
           Healing — like decluttering — begins with giving yourself permission to release what no longer serves you.
         </p>
-        <div className="font-script text-2xl text-muted mt-5">— Nichole &amp; Kate</div>
+        <div className="font-script text-3xl text-muted mt-6">— Nichole &amp; Kate</div>
       </section>
     </div>
   )
@@ -160,9 +160,9 @@ function Card({
       >
         {icon}
       </div>
-      <h3 className="font-display text-2xl text-ink mb-2">{title}</h3>
-      <p className="text-sm text-muted leading-relaxed">{body}</p>
-      <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-sage-500 group-hover:gap-2.5 transition-all">
+      <h3 className="font-display text-3xl text-ink mb-3">{title}</h3>
+      <p className="text-lg text-muted leading-relaxed">{body}</p>
+      <div className="mt-5 inline-flex items-center gap-1.5 text-base font-medium text-sage-500 group-hover:gap-2.5 transition-all">
         Open <ArrowRight className="w-4 h-4" />
       </div>
     </Link>
