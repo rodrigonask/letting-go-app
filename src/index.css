@@ -64,3 +64,44 @@ html { scroll-behavior: smooth; }
 /* Hide scrollbar on horizontal stepper */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* RESET RITUAL — ambient motion */
+@keyframes float-up {
+  0%   { transform: translateY(0)     translateX(0);  opacity: 0; }
+  10%  { opacity: var(--target-opacity, 0.55); }
+  85%  { opacity: var(--target-opacity, 0.55); }
+  100% { transform: translateY(-130vh) translateX(var(--drift, 30px)); opacity: 0; }
+}
+
+@keyframes drift-bg {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.0); }
+  50%      { transform: translate3d(-2%, 1%, 0) scale(1.04); }
+}
+
+@keyframes pulse-aura {
+  0%, 100% { transform: scale(1);    opacity: 0.30; }
+  50%      { transform: scale(1.07); opacity: 0.65; }
+}
+
+@keyframes breathe-soft {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1.0; }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(2px);
+  pointer-events: none;
+  animation: float-up linear infinite;
+}
+
+.bg-drift {
+  animation: drift-bg 40s ease-in-out infinite;
+}
+.aura-pulse {
+  animation: pulse-aura 6s ease-in-out infinite;
+}
+.breathe-soft {
+  animation: breathe-soft 8s ease-in-out infinite;
+}
