@@ -110,10 +110,10 @@ export default function JourneyPath() {
           {/* Right-edge fade on mobile to hint at scroll */}
           <div className="md:hidden absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-cream/80 to-transparent z-10 pointer-events-none rounded-r-3xl" />
 
-          <div className="overflow-x-auto no-scrollbar -mx-2 px-2 pb-2">
+          <div className="overflow-x-auto no-scrollbar -mx-2 px-2 pt-4 pb-2">
             <div className="relative flex items-start min-w-max md:min-w-0 md:justify-between gap-2 md:gap-0">
-              {/* Connecting line — sits behind nodes, aligned to node center (28px) */}
-              <div className="absolute top-7 left-0 right-0 h-0.5 bg-gradient-to-r from-sage-200 via-gold-soft to-sage-200 -z-0" style={{ marginLeft: '44px', marginRight: '44px' }} />
+              {/* Connecting line — sits behind nodes, aligned to node center (16px pt + 28px = 44px) */}
+              <div className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-sage-200 via-gold-soft to-sage-200 -z-0" style={{ top: '44px', marginLeft: '44px', marginRight: '44px' }} />
 
               {statuses.map((s, i) => (
                 <PathNode
@@ -221,7 +221,7 @@ function PathNode({
         className={`w-14 h-14 rounded-full grid place-items-center border ${styles.bg} ${styles.border} ${styles.text} font-display italic text-xl transition-all group-hover:scale-110`}
         style={
           isNext
-            ? { boxShadow: '0 0 0 5px rgba(122,158,142,0.18), 0 4px 16px -4px rgba(122,158,142,0.35)' }
+            ? { boxShadow: '0 0 0 3px rgba(122,158,142,0.18), 0 2px 10px -2px rgba(122,158,142,0.28)' }
             : undefined
         }
       >
