@@ -60,7 +60,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       {!hideChrome && (
         <>
           {/* Mobile bottom nav */}
-          <nav className="md:hidden fixed bottom-0 inset-x-0 z-30 bg-ivory/95 backdrop-blur-md border-t border-rule/60 px-2 pb-2 pt-1">
+          <nav className="md:hidden fixed bottom-0 inset-x-0 z-30 bg-ivory/95 backdrop-blur-md border-t border-rule/60 px-1 pb-[max(8px,env(safe-area-inset-bottom))] pt-1">
             <div className="flex items-center justify-around">
               {navItems.map(({ to, label, icon: Icon }) => (
                 <NavLink
@@ -68,13 +68,13 @@ export default function Layout({ children }: { children: ReactNode }) {
                   to={to}
                   end={to === '/'}
                   className={({ isActive }) =>
-                    `flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-[10px] font-medium tracking-wide ${
+                    `flex flex-col items-center gap-1 px-2 py-2 rounded-lg text-[10px] font-medium tracking-wide flex-1 min-w-0 ${
                       isActive ? 'text-sage-600' : 'text-muted'
                     }`
                   }
                 >
                   <Icon className="w-5 h-5" />
-                  {label}
+                  <span className="truncate max-w-full">{label}</span>
                 </NavLink>
               ))}
             </div>

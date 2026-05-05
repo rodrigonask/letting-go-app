@@ -21,18 +21,22 @@ export default function BreathPause() {
     const id = setInterval(() => {
       setSecLeft((s) => {
         if (s > 1) return s - 1
-        // Advance phase
+        // Advance phase using a functional update so we don't read stale state
         setStepIdx((i) => {
           const next = (i + 1) % SEQUENCE.length
-          setSecLeft(SEQUENCE[next]!.seconds)
           if (next === 0) setCycles((c) => c + 1)
           return next
         })
-        return SEQUENCE[stepIdx]!.seconds
+        return s // setStepIdx effect below will reset secLeft on next tick
       })
     }, 1000)
     return () => clearInterval(id)
-  }, [open, stepIdx])
+  }, [open])
+
+  // When phase advances, reset its countdown to that phase's duration
+  useEffect(() => {
+    if (open) setSecLeft(SEQUENCE[stepIdx]!.seconds)
+  }, [stepIdx, open])
 
   const close = () => {
     setOpen(false)
@@ -57,8 +61,9 @@ export default function BreathPause() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-24 md:bottom-6 right-5 md:right-6 z-40 group"
+        className="fixed bottom-[88px] md:bottom-6 right-5 md:right-6 z-40 group"
         title="Take a breath"
+        aria-label="Take a breath"
       >
         <div className="w-14 h-14 rounded-full bg-sage-500 hover:bg-sage-600 text-cream shadow-lg shadow-sage-500/30 grid place-items-center transition-all hover:scale-105">
           <Wind className="w-5 h-5" />

@@ -66,12 +66,13 @@ export default function JourneyPath() {
   const tending = statuses.filter((s) => s.status === 'tending').length
   const total = statuses.length
 
-  // Find the "next" journey: continue last visited if not done, else first untouched/tending
+  // Find the "next" journey: prefer first untouched (gentle path), else continue last visited if tending, else first tending
   const lastVisitedStatus = statuses.find((s) => s.journey.id === lastVisited)
+  const firstUntouched = statuses.find((s) => s.status === 'untouched')
   const nextJourney =
-    (lastVisitedStatus && lastVisitedStatus.status !== 'complete' ? lastVisitedStatus : null) ||
+    firstUntouched ||
+    (lastVisitedStatus && lastVisitedStatus.status === 'tending' ? lastVisitedStatus : null) ||
     statuses.find((s) => s.status === 'tending') ||
-    statuses.find((s) => s.status === 'untouched') ||
     statuses[0]!
 
   const overallPct = Math.round(((completed + tending * 0.5) / total) * 100)
@@ -105,24 +106,30 @@ export default function JourneyPath() {
         </div>
 
         {/* THE PATH — 8 nodes connected by a line */}
-        <div className="relative overflow-x-auto no-scrollbar -mx-2 px-2 pb-2">
-          <div className="relative flex items-start min-w-max md:min-w-0 md:justify-between gap-1 md:gap-0">
-            {/* Connecting line behind nodes */}
-            <div className="absolute top-7 left-0 right-0 h-0.5 bg-gradient-to-r from-sage-200 via-gold-soft to-sage-200 -z-0 mx-7" />
+        <div className="relative">
+          {/* Right-edge fade on mobile to hint at scroll */}
+          <div className="md:hidden absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-cream/80 to-transparent z-10 pointer-events-none rounded-r-3xl" />
 
-            {statuses.map((s) => (
-              <PathNode
-                key={s.journey.id}
-                journeyId={s.journey.id}
-                roman={s.journey.numberRoman}
-                title={s.journey.title}
-                accent={s.journey.titleAccent}
-                status={s.status}
-                isNext={s.journey.id === nextJourney.journey.id}
-                written={s.written}
-                expected={s.expected}
-              />
-            ))}
+          <div className="overflow-x-auto no-scrollbar -mx-2 px-2 pb-2">
+            <div className="relative flex items-start min-w-max md:min-w-0 md:justify-between gap-2 md:gap-0">
+              {/* Connecting line — sits behind nodes, aligned to node center (28px) */}
+              <div className="absolute top-7 left-0 right-0 h-0.5 bg-gradient-to-r from-sage-200 via-gold-soft to-sage-200 -z-0" style={{ marginLeft: '44px', marginRight: '44px' }} />
+
+              {statuses.map((s, i) => (
+                <PathNode
+                  key={s.journey.id}
+                  journeyId={s.journey.id}
+                  roman={s.journey.numberRoman}
+                  isWelcome={i === 0}
+                  title={s.journey.title}
+                  accent={s.journey.titleAccent}
+                  status={s.status}
+                  isNext={s.journey.id === nextJourney.journey.id}
+                  written={s.written}
+                  expected={s.expected}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -158,8 +165,8 @@ export default function JourneyPath() {
 function PathNode({
   journeyId,
   roman,
+  isWelcome,
   title,
-  accent,
   status,
   isNext,
   written,
@@ -167,6 +174,7 @@ function PathNode({
 }: {
   journeyId: string
   roman: string
+  isWelcome: boolean
   title: string
   accent: string
   status: Status
@@ -179,50 +187,56 @@ function PathNode({
       bg: 'bg-cream',
       ring: 'border-rule border-dashed',
       text: 'text-muted',
-      label: 'Untouched',
     },
     tending: {
       bg: 'bg-gold-soft',
       ring: 'border-gold border-2',
       text: 'text-gold-deep',
-      label: 'Tending',
     },
     complete: {
       bg: 'bg-sage-400',
       ring: 'border-sage-500 border-2',
       text: 'text-cream',
-      label: 'Complete',
     },
   }[status]
+
+  // Compact, single-line label (capitalize first letter only)
+  const shortLabel = isWelcome ? 'Welcome' : title.replace(/[,.]?$/, '')
+
+  // Status hint for tending — keep brief
+  const tendingHint =
+    journeyId === 'journey-4'
+      ? `${written} item${written === 1 ? '' : 's'}`
+      : journeyId === 'journey-5'
+        ? `${Math.min(written, 3)}/3 resets`
+        : `${written}/${expected}`
 
   return (
     <Link
       to={`/journey/${journeyId}`}
-      className="relative flex flex-col items-center gap-2 z-10 group min-w-[88px]"
+      className="relative flex flex-col items-center gap-2.5 z-10 group min-w-[78px] md:min-w-0"
     >
       <div
         className={`w-14 h-14 rounded-full grid place-items-center border ${styles.bg} ${styles.ring} ${styles.text} font-display italic text-xl transition-all group-hover:scale-110 ${
-          isNext ? 'ring-4 ring-sage-300/50 ring-offset-2 ring-offset-cream' : ''
+          isNext ? 'ring-4 ring-sage-300/60 ring-offset-2 ring-offset-cream/40' : ''
         }`}
       >
-        {roman}
+        {isWelcome ? <span className="text-2xl leading-none">✦</span> : roman}
       </div>
-      <div className="text-center max-w-[92px]">
-        <div className="font-display text-sm md:text-base text-ink leading-tight font-medium">
-          {title}
+      <div className="text-center w-20 md:w-24">
+        <div className="font-display text-sm md:text-base text-ink leading-tight font-medium truncate">
+          {shortLabel}
         </div>
-        <div className="font-display italic text-xs md:text-sm text-sage-500 leading-tight">
-          {accent}
-        </div>
-        <div className="text-[10px] tracking-[0.18em] uppercase mt-1.5 text-muted">
-          {status === 'untouched' && '·'}
-          {status === 'tending' &&
-            (journeyId === 'journey-4'
-              ? `${written} item${written === 1 ? '' : 's'}`
-              : journeyId === 'journey-5'
-                ? `${written}/3 reset${written === 1 ? '' : 's'}`
-                : `${written}/${expected}`)}
-          {status === 'complete' && '✓ done'}
+        <div
+          className={`text-[10px] tracking-[0.18em] uppercase mt-1 h-3.5 ${
+            status === 'complete'
+              ? 'text-sage-600 font-semibold'
+              : status === 'tending'
+                ? 'text-gold-deep'
+                : 'text-transparent'
+          }`}
+        >
+          {status === 'tending' ? tendingHint : status === 'complete' ? '✓ done' : '·'}
         </div>
       </div>
     </Link>
