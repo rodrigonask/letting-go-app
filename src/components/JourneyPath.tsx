@@ -182,28 +182,29 @@ function PathNode({
   written: number
   expected: number
 }) {
+  // Welcome gets its own soft styling so it reads as an invitation, not a placeholder
+  const isWelcomeUntouched = isWelcome && status === 'untouched'
+
   const styles = {
     untouched: {
-      bg: 'bg-cream',
-      ring: 'border-rule border-dashed',
-      text: 'text-muted',
+      bg: isWelcomeUntouched ? 'bg-cream' : 'bg-cream',
+      border: isWelcomeUntouched ? 'border-gold-soft border-2' : 'border-rule border-dashed',
+      text: isWelcomeUntouched ? 'text-gold-deep' : 'text-muted',
     },
     tending: {
       bg: 'bg-gold-soft',
-      ring: 'border-gold border-2',
+      border: 'border-gold border-2',
       text: 'text-gold-deep',
     },
     complete: {
       bg: 'bg-sage-400',
-      ring: 'border-sage-500 border-2',
+      border: 'border-sage-500 border-2',
       text: 'text-cream',
     },
   }[status]
 
-  // Compact, single-line label (capitalize first letter only)
   const shortLabel = isWelcome ? 'Welcome' : title.replace(/[,.]?$/, '')
 
-  // Status hint for tending — keep brief
   const tendingHint =
     journeyId === 'journey-4'
       ? `${written} item${written === 1 ? '' : 's'}`
@@ -217,14 +218,21 @@ function PathNode({
       className="relative flex flex-col items-center gap-2.5 z-10 group min-w-[78px] md:min-w-0"
     >
       <div
-        className={`w-14 h-14 rounded-full grid place-items-center border ${styles.bg} ${styles.ring} ${styles.text} font-display italic text-xl transition-all group-hover:scale-110 ${
-          isNext ? 'ring-4 ring-sage-300/60 ring-offset-2 ring-offset-cream/40' : ''
-        }`}
+        className={`w-14 h-14 rounded-full grid place-items-center border ${styles.bg} ${styles.border} ${styles.text} font-display italic text-xl transition-all group-hover:scale-110`}
+        style={
+          isNext
+            ? { boxShadow: '0 0 0 5px rgba(122,158,142,0.18), 0 4px 16px -4px rgba(122,158,142,0.35)' }
+            : undefined
+        }
       >
-        {isWelcome ? <span className="text-2xl leading-none">✦</span> : roman}
+        {isWelcome ? <span className="text-xl leading-none">✦</span> : roman}
       </div>
       <div className="text-center w-20 md:w-24">
-        <div className="font-display text-sm md:text-base text-ink leading-tight font-medium truncate">
+        <div
+          className={`font-display text-sm md:text-base leading-tight font-medium truncate ${
+            isNext ? 'text-sage-600' : 'text-ink'
+          }`}
+        >
           {shortLabel}
         </div>
         <div
@@ -233,10 +241,18 @@ function PathNode({
               ? 'text-sage-600 font-semibold'
               : status === 'tending'
                 ? 'text-gold-deep'
-                : 'text-transparent'
+                : isNext
+                  ? 'text-sage-500 font-medium'
+                  : 'text-transparent'
           }`}
         >
-          {status === 'tending' ? tendingHint : status === 'complete' ? '✓ done' : '·'}
+          {status === 'tending'
+            ? tendingHint
+            : status === 'complete'
+              ? '✓ done'
+              : isNext
+                ? 'Start here'
+                : '·'}
         </div>
       </div>
     </Link>
